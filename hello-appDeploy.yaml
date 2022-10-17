@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "1"
+  creationTimestamp: "2022-10-17T15:20:37Z"
+  generation: 1
+  labels:
+    app: hello-app2
+  name: hello-app2
+  namespace: default
+  resourceVersion: "7598"
+  uid: 45d9402f-7a15-4932-afd1-bc055eda575d
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: hello-app2
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: hello-app2
+    spec:
+      containers:
+      - image: ramirafeh/hello-app:1.0
+        imagePullPolicy: IfNotPresent
+        name: hello-app
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+status:
+  availableReplicas: 1
+  conditions:
+  - lastTransitionTime: "2022-10-17T15:20:39Z"
+    lastUpdateTime: "2022-10-17T15:20:39Z"
+    message: Deployment has minimum availability.
+    reason: MinimumReplicasAvailable
+    status: "True"
+    type: Available
+  - lastTransitionTime: "2022-10-17T15:20:37Z"
+    lastUpdateTime: "2022-10-17T15:20:39Z"
+    message: ReplicaSet "hello-app2-577d686c6b" has successfully progressed.
+    reason: NewReplicaSetAvailable
+    status: "True"
+    type: Progressing
+  observedGeneration: 1
+  readyReplicas: 1
+  replicas: 1
+  updatedReplicas: 1

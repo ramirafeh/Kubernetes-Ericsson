@@ -1,0 +1,178 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: hello-app-7758c997fb-ffttq
+  generateName: hello-app-7758c997fb-
+  namespace: default
+  uid: 088d25dc-eda0-4102-a5f2-630de7211c6b
+  resourceVersion: '413'
+  creationTimestamp: '2022-10-17T03:06:32Z'
+  labels:
+    app: hello-app
+    pod-template-hash: 7758c997fb
+  ownerReferences:
+    - apiVersion: apps/v1
+      kind: ReplicaSet
+      name: hello-app-7758c997fb
+      uid: 450b84c5-609b-4b2d-acdd-a7ca7afcd3c6
+      controller: true
+      blockOwnerDeletion: true
+  managedFields:
+    - manager: kube-controller-manager
+      operation: Update
+      apiVersion: v1
+      time: '2022-10-17T03:06:32Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:generateName: {}
+          f:labels:
+            .: {}
+            f:app: {}
+            f:pod-template-hash: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"450b84c5-609b-4b2d-acdd-a7ca7afcd3c6"}: {}
+        f:spec:
+          f:containers:
+            k:{"name":"hello-app"}:
+              .: {}
+              f:image: {}
+              f:imagePullPolicy: {}
+              f:name: {}
+              f:resources: {}
+              f:terminationMessagePath: {}
+              f:terminationMessagePolicy: {}
+          f:dnsPolicy: {}
+          f:enableServiceLinks: {}
+          f:restartPolicy: {}
+          f:schedulerName: {}
+          f:securityContext: {}
+          f:terminationGracePeriodSeconds: {}
+    - manager: kubelet
+      operation: Update
+      apiVersion: v1
+      time: '2022-10-17T03:06:50Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          f:conditions:
+            k:{"type":"ContainersReady"}:
+              .: {}
+              f:lastProbeTime: {}
+              f:lastTransitionTime: {}
+              f:status: {}
+              f:type: {}
+            k:{"type":"Initialized"}:
+              .: {}
+              f:lastProbeTime: {}
+              f:lastTransitionTime: {}
+              f:status: {}
+              f:type: {}
+            k:{"type":"Ready"}:
+              .: {}
+              f:lastProbeTime: {}
+              f:lastTransitionTime: {}
+              f:status: {}
+              f:type: {}
+          f:containerStatuses: {}
+          f:hostIP: {}
+          f:phase: {}
+          f:podIP: {}
+          f:podIPs:
+            .: {}
+            k:{"ip":"172.17.0.3"}:
+              .: {}
+              f:ip: {}
+          f:startTime: {}
+      subresource: status
+spec:
+  volumes:
+    - name: kube-api-access-tdlgs
+      projected:
+        sources:
+          - serviceAccountToken:
+              expirationSeconds: 3607
+              path: token
+          - configMap:
+              name: kube-root-ca.crt
+              items:
+                - key: ca.crt
+                  path: ca.crt
+          - downwardAPI:
+              items:
+                - path: namespace
+                  fieldRef:
+                    apiVersion: v1
+                    fieldPath: metadata.namespace
+        defaultMode: 420
+  containers:
+    - name: hello-app
+      image: ramirafeh/hello-app:1.0
+      resources: {}
+      volumeMounts:
+        - name: kube-api-access-tdlgs
+          readOnly: true
+          mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      imagePullPolicy: IfNotPresent
+  restartPolicy: Always
+  terminationGracePeriodSeconds: 30
+  dnsPolicy: ClusterFirst
+  serviceAccountName: default
+  serviceAccount: default
+  nodeName: minikube
+  securityContext: {}
+  schedulerName: default-scheduler
+  tolerations:
+    - key: node.kubernetes.io/not-ready
+      operator: Exists
+      effect: NoExecute
+      tolerationSeconds: 300
+    - key: node.kubernetes.io/unreachable
+      operator: Exists
+      effect: NoExecute
+      tolerationSeconds: 300
+  priority: 0
+  enableServiceLinks: true
+  preemptionPolicy: PreemptLowerPriority
+status:
+  phase: Running
+  conditions:
+    - type: Initialized
+      status: 'True'
+      lastProbeTime: null
+      lastTransitionTime: '2022-10-17T03:06:32Z'
+    - type: Ready
+      status: 'True'
+      lastProbeTime: null
+      lastTransitionTime: '2022-10-17T03:06:50Z'
+    - type: ContainersReady
+      status: 'True'
+      lastProbeTime: null
+      lastTransitionTime: '2022-10-17T03:06:50Z'
+    - type: PodScheduled
+      status: 'True'
+      lastProbeTime: null
+      lastTransitionTime: '2022-10-17T03:06:32Z'
+  hostIP: 192.168.49.2
+  podIP: 172.17.0.3
+  podIPs:
+    - ip: 172.17.0.3
+  startTime: '2022-10-17T03:06:32Z'
+  containerStatuses:
+    - name: hello-app
+      state:
+        running:
+          startedAt: '2022-10-17T03:06:50Z'
+      lastState: {}
+      ready: true
+      restartCount: 0
+      image: ramirafeh/hello-app:1.0
+      imageID: >-
+        docker-pullable://ramirafeh/hello-app@sha256:698ab08afbbabf3b242d7ca3017a2b72defd20cb00813f729c2ed4651584b02d
+      containerID: >-
+        docker://c1001e02d12548aaf53aa1e4dce29e77579d069d0b3d6b0c0686aefe986c846b
+      started: true
+  qosClass: BestEffort
